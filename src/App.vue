@@ -2,7 +2,7 @@
 import GameCounter from '@/components/GameCounter.vue'
 
 const MIN_NUMBER = 0
-const MAX_NUMBER = 100
+const MAX_NUMBER = 50
 
 </script>
 

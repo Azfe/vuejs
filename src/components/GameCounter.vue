@@ -1,16 +1,9 @@
 <script setup>
+import JSConfetti from 'js-confetti'
+import { ref, watch } from 'vue'
+import { getRandomNumbers } from '@/utils/randomNumbers'
 
-import { ref } from 'vue'
 
-const counter = ref(0)
-
-const increment = () => {
-  counter.value++
-}
-
-const decrement = () => {
-  counter.value--
-}
 
 const { minNumber, maxNumber } = defineProps({
   minNumber: {
@@ -23,16 +16,43 @@ const { minNumber, maxNumber } = defineProps({
   }
 })
 
-console.log(minNumber, maxNumber)
+const { initialRandomNumber, numberToGuess } = getRandomNumbers({ maxNumber, minNumber })
 
+const jsConfetti = new JSConfetti()
+
+const counter = ref(initialRandomNumber)
+
+const win = ref(false)
+
+const increment = () => {
+  if (maxNumber === counter.value) return
+  counter.value++
+}
+
+const decrement = () => {
+  if (counter.value === 0) return
+  counter.value--
+}
+
+watch(counter, () => {
+  if (counter.value === numberToGuess) {
+    console.log('¡Has adivinado el número!', counter.value)
+    jsConfetti.addConfetti({
+      emojis: ['🎉', '✨', '🎊', '🥳'],
+      emojiSize: 50,
+      confettiNumber: 100
+    })
+    win.value = true
+  }
+})
 </script>
 
 <template>
   <div class="counter-game">
     <span class="number">{{ counter }}</span>
     <div class="button-group">
-      <button @click="decrement">-</button>
-      <button @click="increment">+</button>
+      <button :disabled="win" @click="decrement">-</button>
+      <button :disabled="win" @click="increment">+</button>
     </div>
   </div>
 </template>
