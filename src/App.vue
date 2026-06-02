@@ -11,7 +11,7 @@ const MAX_NUMBER = 100
     <div class="wrapper">
       <div class="wrapper__content">
         <h1 class="title">Guess the number! 🎉</h1>
-        <span>{{ counter }}</span>
+        <!-- <span>{{ counter }}</span> -->
         <div>
           <GameCounter :min-number="MIN_NUMBER" :max-number="MAX_NUMBER" />
         </div>
