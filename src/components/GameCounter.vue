@@ -1,36 +1,78 @@
 <script setup>
+const { minNumber, maxNumber } = defineProps(['minNumber', 'maxNumber'])
 
-const isActive = true
+console.log(minNumber, maxNumber)
 
 </script>
 
 <template>
-  <button @click="counter++">+</button>
-
-  <span class="counter" :class="{ 'counter--active': isActive }">contador: <span>0 - {{ counter }}</span></span>
-
-  <button @click="counter--">-</button>
-
+  <div class="counter-game">
+    <span class="number">{{ number }}</span>
+    <div class="button-group">
+      <button>-</button>
+      <button>+</button>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.counter {
+.counter-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.number {
+  font-size: 5rem;
   font-weight: bold;
-  font-size: 1.5em;
-  margin: 0 20px;
-
-  &>span {
-    color: #1f099b;
-  }
+  color: white;
+  opacity: 0.9;
+  transition: all 0.3s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-.counter--active {
-  color: #4CAF50;
+.number:hover {
+  transform: scale(1.1);
+  color: rgb(219, 234, 254);
 }
 
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.clue {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Estilos botones */
 button {
-  background-color: #a80b0b;
-  /* Green */
-  margin: 0 10px;
+  width: 4rem;
+  height: 4rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+  background-color: rgba(119, 170, 251, 0.914);
+  color: white;
+  border: none;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background-color: rgba(26, 77, 188, 0.7);
 }
 </style>
