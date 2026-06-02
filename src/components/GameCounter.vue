@@ -1,5 +1,16 @@
 <script setup>
-const { minNumber, maxNumber } = defineProps(['minNumber', 'maxNumber'])
+const { minNumber, maxNumber } = defineProps({
+  minNumber: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  maxNumber: {
+    type: Number,
+    required: true,
+    default: 100
+  }
+})
 
 console.log(minNumber, maxNumber)
 
