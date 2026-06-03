@@ -61,6 +61,9 @@ const styleButtons = computed(() => {
       <button :style="styleButtons" :disabled="win" @click="decrement">-</button>
       <button :style="styleButtons" :disabled="win" @click="increment">+</button>
     </div>
+    <p v-if="counter < numberToGuess">Busca un número mayor</p>
+    <p v-else-if="counter > numberToGuess">Busca un número menor</p>
+    <p v-show="win">¡Has ganado!</p>
   </div>
 </template>
 
